@@ -1,0 +1,38 @@
+{
+    "extends": "tslint:recommended",
+    "rulesDirectory": [
+        "src/",
+        "examples"
+    ],
+    "linterOptions": {
+        "exclude": []
+    },
+    "rules": {
+        "no-shadowed-variable": false,
+        "max-line-length": false,
+        "variable-name": [
+            false
+        ],
+        "ordered-imports": true,
+        "member-ordering": false,
+        "align": false,
+        "interface-over-type-literal": false,
+        "no-consecutive-blank-lines": [
+            true,
+            2
+        ],
+        "object-literal-sort-keys": false,
+        "no-console": {
+            "severity": "warning",
+            "options": [
+                "debug",
+                "info",
+                "log",
+                "time",
+                "timeEnd",
+                "trace"
+            ]
+        }
+    },
+    "jsRules": {}
+}

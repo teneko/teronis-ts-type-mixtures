@@ -1,0 +1,30 @@
+{
+  "name": "teronis-ts-mixtures",
+  "version": "0.0.0",
+  "description": "TypeScript type mixtures",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teroneko/teronis-ts-type-mixtures.git"
+  },
+  "keywords": [
+    "teronis",
+    "type",
+    "mixtures"
+  ],
+  "author": "C. Loncar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/teroneko/teronis-ts-type-mixtures/issues"
+  },
+  "homepage": "https://github.com/teroneko/teronis-ts-type-mixtures#readme",
+  "dependencies": {
+    "@teronis/ts-definitions": "^0.7.3",
+    "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
+    "typescript-logic": "0.0.0"
+  }
+}
