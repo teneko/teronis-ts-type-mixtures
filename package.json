@@ -1,9 +1,13 @@
 {
-  "name": "teronis-ts-mixtures",
+  "name": "@teronis/ts-type-mixtures",
   "version": "0.0.0",
   "description": "TypeScript type mixtures",
-  "main": "index.js",
+  "main": "dist/teronis-ts-type-mixtures.js",
+  "source": "src/index.ts",
+  "types": "dist/teronis-ts-type-mixtures.d.ts",
   "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,16 +19,30 @@
     "type",
     "mixtures"
   ],
-  "author": "C. Loncar",
+  "author": "teroneko",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/teroneko/teronis-ts-type-mixtures/issues"
   },
   "homepage": "https://github.com/teroneko/teronis-ts-type-mixtures#readme",
-  "dependencies": {
-    "@teronis/ts-definitions": "^0.7.3",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-typescript": "^7.1.0",
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-loader": "^8.0.4",
+    "dts-bundle-webpack": "^1.0.2",
+    "source-map-loader": "^0.2.4",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "webpack": "^4.29.2",
+    "webpack-cli": "^3.2.3",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
     "typescript-logic": "0.0.0"
+  },
+  "peerDependencies": {
+    "@teronis/ts-definitions": "^0.7.3"
   }
 }
