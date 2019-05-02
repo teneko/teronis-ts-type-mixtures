@@ -40,7 +40,6 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "typescript-logic": "0.0.0"
   },
   "peerDependencies": {
     "@teronis/ts-definitions": "^0.7.3"
