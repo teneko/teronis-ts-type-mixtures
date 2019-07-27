@@ -1,4 +1,4 @@
-import { Length, OptionalKeys, DeepPartial, PickDeepPartial, NoneEmptyPick, NoneTypeEqualsNotTypeIntersection, NoneNotTypeExtendsTypeIntersection, NoneTypeExtendsNotTypeIntersection, PickAs, Omit, PickAsDeepAs, OmitType } from "@teronis/ts-definitions";
+import { Length, OptionalKeys, DeepPartial, PickDeepPartial, NoneEmptyPick, NoneTypeEqualsNotTypeIntersection, NoneNotTypeExtendsTypeIntersection, NoneTypeExtendsNotTypeIntersection, PickAs, PickAsDeepAs, OmitType } from "@teronis/ts-definitions";
 
 export type ExtractOrUnknown<T, U, Extraction = Extract<T, U>> = [Extraction] extends [never] ? unknown : Extraction;
 
@@ -100,9 +100,9 @@ export interface ImpureFlankContent<
 export interface ContentKeychain<
     Content,
     __OptionalKeys extends OptionalKeys<Content> = OptionalKeys<Content>,
-    __RequiredKeys extends Exclude<keyof Content, __OptionalKeys> = Exclude<keyof Content, __OptionalKeys>
+    __RequiredKeys extends Exclude<keyof Content, __OptionalKeys> = Exclude<keyof Content, __OptionalKeys>,
     > {
-    OptionalKeys: __OptionalKeys;
+    OptionalKeys: Exclude<keyof Content, __RequiredKeys>; // Exclude is required due to "not assignable to type symbol"-error
     RequiredKeys: __RequiredKeys;
     Keys: __OptionalKeys | __RequiredKeys;
 }
@@ -111,25 +111,19 @@ export interface DualContentKeychain<
     LeftContent,
     RightContent,
     __LeftKeychain extends ContentKeychain<LeftContent> = ContentKeychain<LeftContent>,
-    __RightKeychain extends ContentKeychain<RightContent> = ContentKeychain<RightContent>,
-    __RequiredKeys = __LeftKeychain["RequiredKeys"] | __RightKeychain["RequiredKeys"],
-    __OptionalKeys = __LeftKeychain["OptionalKeys"] | __RightKeychain["OptionalKeys"],
-    __Keys = __LeftKeychain["Keys"] | __RightKeychain["Keys"],
-    __MutualRequiredKeys = __LeftKeychain["RequiredKeys"] & __RightKeychain["RequiredKeys"],
-    __MutualOptionalKeys = __LeftKeychain["OptionalKeys"] & __RightKeychain["OptionalKeys"],
-    __MutualKeys = __LeftKeychain["Keys"] & __RightKeychain["Keys"]
+    __RightKeychain extends ContentKeychain<RightContent> = ContentKeychain<RightContent>
     > {
     LeftValueKeychain: __LeftKeychain;
     RightValueKeychain: __RightKeychain;
-    RequiredKeys: __RequiredKeys;
-    OptionalKeys: __OptionalKeys;
-    Keys: __Keys;
-    MutualRequiredKeys: __MutualRequiredKeys;
-    MutualOptionalKeys: __MutualOptionalKeys;
-    MutualKeys: __MutualKeys;
+    RequiredKeys: __LeftKeychain["RequiredKeys"] | __RightKeychain["RequiredKeys"];
+    OptionalKeys: __LeftKeychain["OptionalKeys"] | __RightKeychain["OptionalKeys"];
+    Keys: __LeftKeychain["Keys"] | __RightKeychain["Keys"];
+    MutualRequiredKeys: __LeftKeychain["RequiredKeys"] & __RightKeychain["RequiredKeys"];
+    MutualOptionalKeys: __LeftKeychain["OptionalKeys"] & __RightKeychain["OptionalKeys"];
+    MutualKeys: __LeftKeychain["Keys"] & __RightKeychain["Keys"];
 }
 
-type DefaultDualKeychain = DualContentKeychain<any, any, any, any, any, any, any>;
+type DefaultDualKeychain = DualContentKeychain<any, any, any, any>;
 
 export type FlankValuesKeychain<
     DualContent extends DefaultDualContent,
