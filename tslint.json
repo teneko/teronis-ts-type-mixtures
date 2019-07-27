@@ -1,8 +1,7 @@
 {
     "extends": "tslint:recommended",
     "rulesDirectory": [
-        "src/",
-        "examples"
+        "src/"
     ],
     "linterOptions": {
         "exclude": []
@@ -32,7 +31,9 @@
                 "timeEnd",
                 "trace"
             ]
-        }
+        },
+        "interface-name": false,
+        "no-empty-interface": false
     },
     "jsRules": {}
 }

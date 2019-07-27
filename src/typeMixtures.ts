@@ -1,4 +1,4 @@
-import { Length, OptionalKeys, DeepPartial, PickDeepPartial, NoneEmptyPick, NoneTypeEqualsNotTypeIntersection, NoneNotTypeExtendsTypeIntersection, NoneTypeExtendsNotTypeIntersection, PickAs, PickAsDeepAs, OmitType } from "@teronis/ts-definitions";
+import { DeepPartial, Length, NoneEmptyPick, NoneTypeExtendsNotTypeIntersection, OptionalKeys, PickAs, PickAsDeepAs } from "@teronis/ts-definitions";
 
 export type ExtractOrUnknown<T, U, Extraction = Extract<T, U>> = [Extraction] extends [never] ? unknown : Extraction;
 
@@ -153,9 +153,9 @@ export interface MixtureKinds {
     None: "None";
     Intersection: "Intersection";
     LeftExceptRight: "LeftExceptRight";
-    LeftIncludingIntersection: MixtureKinds["Intersection"] | MixtureKinds["LeftExceptRight"]
+    LeftIncludingIntersection: MixtureKinds["Intersection"] | MixtureKinds["LeftExceptRight"];
     RightExceptLeft: "RightExceptLeft";
-    RightIncludingIntersection: MixtureKinds["Intersection"] | MixtureKinds["RightExceptLeft"]
+    RightIncludingIntersection: MixtureKinds["Intersection"] | MixtureKinds["RightExceptLeft"];
     FlanksExceptIntersection: MixtureKinds["LeftExceptRight"] | MixtureKinds["RightExceptLeft"];
     All: MixtureKinds["Intersection"] | MixtureKinds["FlanksExceptIntersection"];
 }
@@ -180,12 +180,12 @@ export interface ConcretePrimsMixtureDefaultOptions extends ConcreteOwnedPrimsMi
 export interface DefaultedPrimsMixtureOptions {
     Options: DeepPartial<OwnedPrimsMixtureOptions>;
     DefaultOptions: PrimsMixtureDefaultOptions;
-};
+}
 
 export interface ConcreteDefaultedPrimsMixtureOptions extends DefaultedPrimsMixtureOptions {
     Options: DeepPartial<ConcreteOwnedPrimsMixtureOptions>;
-    DefaultOptions: ConcretePrimsMixtureDefaultOptions
-};
+    DefaultOptions: ConcretePrimsMixtureDefaultOptions;
+}
 
 /** A Primitives-Mixture. */
 export type PrimsMixture<
@@ -228,7 +228,7 @@ export interface ConcreteOwnedArrayMixtureOptions extends OwnedArrayMixtureOptio
 }
 
 export interface OwnedOptionsArrayMixtureOptions {
-    OwnedOptions: OwnedArrayMixtureOptions
+    OwnedOptions: OwnedArrayMixtureOptions;
 }
 
 export interface ConcreteOwnedOptionsArrayMixtureOptions extends OwnedOptionsArrayMixtureOptions {
@@ -325,9 +325,9 @@ export interface NestedArrayInPropsMixtureOptions extends OwnedOptionsArrayMixtu
             RecursionOptions: {
                 ArrayMixtureOptions: OwnedOptionsArrayMixtureOptions;
                 PrimsMixtureOptions: OwnedPrimsMixtureOptions;
-            }
-        }
-    },
+            },
+        },
+    };
 }
 
 export interface ConcreteNestedArrayInPropsMixtureOptions extends NestedArrayInPropsMixtureOptions {
@@ -337,9 +337,9 @@ export interface ConcreteNestedArrayInPropsMixtureOptions extends NestedArrayInP
             RecursionOptions: {
                 ArrayMixtureOptions: ConcreteOwnedOptionsArrayMixtureOptions;
                 PrimsMixtureOptions: ConcreteOwnedPrimsMixtureOptions;
-            }
-        }
-    }
+            },
+        },
+    };
 }
 
 /** Base Options */
@@ -413,12 +413,12 @@ export interface ConcretePropsMixtureDefaultOptions extends ConcretePropsMixture
 export interface DefaultedPropsMixtureOptions {
     Options: DeepPartial<PropsMixtureOptions>;
     DefaultOptions: PropsMixtureDefaultOptions;
-};
+}
 
 export interface ConcreteDefaultedPropsMixtureOptions extends DefaultedPropsMixtureOptions {
     Options: DeepPartial<PropsMixtureOptions>;
-    DefaultOptions: ConcretePropsMixtureDefaultOptions
-};
+    DefaultOptions: ConcretePropsMixtureDefaultOptions;
+}
 
 // /** Base Options */
 // export interface DefaultedPropsMixtureOptions  {
@@ -441,7 +441,7 @@ export type RecursiveMutualPropsMixture<
                 Options["Options"] extends { MutualPropsMixtureOptions: { RecursionOptions: PickAsDeepAs<MutualPropsMixtureRecursionOptions, "PrimsMixtureOptions", unknown> } }
                 ? Options["Options"]["MutualPropsMixtureOptions"]["RecursionOptions"]["PrimsMixtureOptions"]
                 : Options["DefaultOptions"]["MutualPropsMixtureOptions"]["RecursionOptions"]["PrimsMixtureOptions"]
-            )
+            ),
         } & { DefaultOptions: Options["DefaultOptions"]["MutualPropsMixtureOptions"]["RecursionOptions"]["PrimsMixtureOptions"] }
     ),
     __MutualPropsMixtureOptions extends MutualPropsMixtureOptions = (
@@ -458,9 +458,9 @@ export type RecursiveMutualPropsMixture<
             PropsMixtureOptions: {
                 MutualPropsMixtureOptions: {
                     RecursionOptions: {
-                        ArrayMixtureOptions: Options["DefaultOptions"]["MutualPropsMixtureOptions"]["RecursionOptions"]["ArrayMixtureOptions"]
-                    }
-                }
+                        ArrayMixtureOptions: Options["DefaultOptions"]["MutualPropsMixtureOptions"]["RecursionOptions"]["ArrayMixtureOptions"],
+                    },
+                },
             },
         }
     ),
@@ -473,13 +473,13 @@ export type RecursiveMutualPropsMixture<
         Options: {
             PrimsMixtureOptions: __PrimsMixtureOptions["Options"],
             PropsMixtureOptions: __PropsMixtureOptions["Options"],
-            ArrayMixtureOptions: __ArrayMixtureOptions
+            ArrayMixtureOptions: __ArrayMixtureOptions,
         },
         DefaultOptions: {
             PrimsMixtureOptions: __PrimsMixtureOptions["DefaultOptions"],
             PropsMixtureOptions: __PropsMixtureOptions["DefaultOptions"],
-            ArrayMixtureOptions: __ArrayMixtureDefaultOptions
-        }
+            ArrayMixtureOptions: __ArrayMixtureDefaultOptions,
+        },
     },
     > = (
         // {
@@ -708,7 +708,6 @@ export type PropsMixture<
     );
 
 
-
 export type PropsMixtureEntry<
     DualContent extends DefaultDualContent,
     Options extends DeepPartial<PropsMixtureOptions> = {},
@@ -747,11 +746,11 @@ export type PrimsPropsMixture<
     > = (
         PrimsMixture<DualContent, {
             Options: Options["Options"]["PrimsMixtureOptions"] & {},
-            DefaultOptions: Options["DefaultOptions"]["PrimsMixtureOptions"]
+            DefaultOptions: Options["DefaultOptions"]["PrimsMixtureOptions"],
         }>
         | PropsMixture<DualContent, {
             Options: Options["Options"]["PropsMixtureOptions"] & {},
-            DefaultOptions: Options["DefaultOptions"]["PropsMixtureOptions"]
+            DefaultOptions: Options["DefaultOptions"]["PropsMixtureOptions"],
         }>
     );
 
@@ -787,15 +786,15 @@ export type ArrayPrimsPropsMixture<
         PrimsPropsMixture<DualContent, {
             Options: {
                 PrimsMixtureOptions: Options["Options"]["PrimsMixtureOptions"],
-                PropsMixtureOptions: Options["Options"]["PropsMixtureOptions"]
+                PropsMixtureOptions: Options["Options"]["PropsMixtureOptions"],
             },
             DefaultOptions: {
                 PrimsMixtureOptions: Options["DefaultOptions"]["PrimsMixtureOptions"]
-                PropsMixtureOptions: Options["DefaultOptions"]["PropsMixtureOptions"]
-            }
+                PropsMixtureOptions: Options["DefaultOptions"]["PropsMixtureOptions"],
+            },
         }>
         | ArrayMixture<DualContent, {
             Options: Options["Options"]["ArrayMixtureOptions"] & {},
-            DefaultOptions: Options["DefaultOptions"]["ArrayMixtureOptions"]
+            DefaultOptions: Options["DefaultOptions"]["ArrayMixtureOptions"],
         }>
     );

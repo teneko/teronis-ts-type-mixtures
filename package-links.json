@@ -1,6 +1,7 @@
 {
 	"isLinked": null,
 	"links": [
-		"@teronis/ts-definitions"
+		"@teronis/ts-definitions",
+		"@teronis/ts-type-mixtures"
 	]
 }
