@@ -693,19 +693,17 @@ export type PropsMixture<
     Options extends DefaultedPropsMixtureOptions,
     __ContentMutations extends ContentMutationOrArray = Options["Options"] extends Pick<OwnedPropsMixtureOptions, "ContentMutations"> ? Options["Options"]["ContentMutations"] : Options["DefaultOptions"]["ContentMutations"],
     __DualContent extends ImpureFlankContent<DualContent, __ContentMutations> = ImpureFlankContent<DualContent, __ContentMutations>
-    > =
-    // {
-    //     _: { BEGINN: Options }
-    // } &
-    (
-        [__DualContent["LeftContent"]] extends [never]
-        ? ([__DualContent["RightContent"]] extends [never]
-            ? never
-            : MixtureKindSelectedPropsMixture<PureDualContent<{}, DualContent["RightContent"]>, Options, [], PureDualContent<{}, __DualContent["RightContent"]>>)
-        : ([__DualContent["RightContent"]] extends [never]
-            ? MixtureKindSelectedPropsMixture<PureDualContent<DualContent["LeftContent"], {}>, Options, [], PureDualContent<__DualContent["LeftContent"], {}>>
-            : MixtureKindSelectedPropsMixture<PureDualContent<DualContent["LeftContent"], DualContent["RightContent"]>, Options, [], PureDualContent<__DualContent["LeftContent"], __DualContent["RightContent"]>>)
-    );
+    > = 2;
+    // &
+    // (
+    //     [__DualContent["LeftContent"]] extends [never]
+    //     ? ([__DualContent["RightContent"]] extends [never]
+    //         ? never
+    //         : MixtureKindSelectedPropsMixture<PureDualContent<{}, DualContent["RightContent"]>, Options, [], PureDualContent<{}, __DualContent["RightContent"]>>)
+    //     : ([__DualContent["RightContent"]] extends [never]
+    //         ? MixtureKindSelectedPropsMixture<PureDualContent<DualContent["LeftContent"], {}>, Options, [], PureDualContent<__DualContent["LeftContent"], {}>>
+    //         : MixtureKindSelectedPropsMixture<PureDualContent<DualContent["LeftContent"], DualContent["RightContent"]>, Options, [], PureDualContent<__DualContent["LeftContent"], __DualContent["RightContent"]>>)
+    // );
 
 
 export type PropsMixtureEntry<
