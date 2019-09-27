@@ -1,5 +1,6 @@
-import { PropsMixture, PropsMixtureDefaultOptions, PureDualContent, MutateContent, ValueContent } from "src";
-import { ContentMutationAsArray, PrimsMixtureBase, PrimsMixtureOptionsContainer, PrimsMixtureDefaultOptions, PrimsMixtureOptions, DefaultDualContent, PrimsMixtureOptionsContainerConcrete, PrimsMixtureConcreteDefaultOptions, ImpureDualContent, ImpureFlankContent, PrimsMixture } from "./typeMixtures";
+import { PropsMixtureBase, PropsMixtureDefaultOptions, PureDualContent, MutateContent, ValueContent } from "src";
+import { ContentMutationAsArray, PrimsMixtureBase, PrimsMixtureOptionsContainerBase, PrimsMixtureDefaultOptionsBase, DefaultDualContent, PrimsMixtureOptionsContainer, PrimsMixtureDefaultOptions, ImpureDualContent, ImpureFlankContent, PrimsMixture } from "./typeMixtures";
+import { NoneTypeExtendsNotTypeIntersection } from "@teronis/ts-definitions";
 
 //
 // Begin tests
@@ -70,9 +71,9 @@ declare var PureDualContent0: PureDualContent0;
 // PrimsMixture
 //
 
-declare var DoesConcreteOptionsExtendsOptions: PrimsMixtureOptionsContainerConcrete extends PrimsMixtureOptionsContainer ? true : false;
+declare var DoesConcreteOptionsExtendsOptions: PrimsMixtureOptionsContainer extends PrimsMixtureOptionsContainerBase ? true : false;
 
-type PrimsMixtureOptions = {
+type PrimsMixtureOptionsBase = {
     MixtureKind: "All",
     MutualPropsMixtureOptions: {
         Recursive: true,
@@ -85,7 +86,7 @@ type PureDualContent1 = PureDualContent<a1 | number, a2>;
 declare var ImpurePureDualContent0: ImpureFlankContent<PureDualContent1, "ExcludeObject">;
 ImpurePureDualContent0.LeftContent;
 
-declare var PrimsMixture0: PrimsMixture<PureDualContent1, PrimsMixtureOptions>;
+declare var PrimsMixture0: PrimsMixture<PureDualContent1, PrimsMixtureOptionsBase>;
 PrimsMixture0;
 
 // type PrimsMixtureDummy<
@@ -100,14 +101,13 @@ PrimsMixture0;
 // End tests
 //
 
-type testtt_0 = PureDualContent<a1, a2>;
 // type testtt_0 = PureDualContent<{ a: { a: "a1" } }, { a: { a: "a2" } }>;
 // type testtt_0_0_1 = PureDualContent<{ a: { a: "" } }, { a: { a: "", b: "" } }>;
 // type testtt_0_1 = ImpureFlankContent<testtt_0, ["ExcludeObject"]>;
 // type testtt23 = PrimsMixture<testtt_0_1>;
 // type testtt_0_2 = ImpureFlankContent<testtt_0, ["ExtractObject"]>;
 // declare const testtt24: PropsMixture<testtt_0, { MixtureKind: "Intersection", MutualPropsMixtureOptions: { ContentMutations: undefined, MixtureKind: "Intersection" | "FlankUnion", Recursive: true } }>;
-declare const testtt24: PropsMixture<testtt_0, {
+declare const testtt24: PropsMixtureBase<PureDualContent0, {
     Options: {
         MixtureKind: "Intersection" | "FlanksExceptIntersection",
         ContentMutations: "ExtractObject",
@@ -117,5 +117,16 @@ declare const testtt24: PropsMixture<testtt_0, {
     },
     DefaultOptions: PropsMixtureDefaultOptions,
 }>;
+// testtt24.__DualRemnantKeychain.LeftRemnant.
+testtt24.RecursiveMutualPropsMixture.MutualOptionalProps.;
+// testtt24.
+
+// type test = typeof testtt24;
+
+declare var CheckNoneTypeExtendsTypes : NoneTypeExtendsNotTypeIntersection<number, never, never, { WrapInTuple: true }>;
 
 // testtt24.a.e.e.e.
+// type test<> = 
+
+declare var TestUnknownNever : Pick<{}, never>;
+type test = typeof TestUnknownNever;
