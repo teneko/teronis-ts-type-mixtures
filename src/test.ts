@@ -3,7 +3,7 @@ import { ContentMutationAsArray, PrimsMixtureBase, PrimsMixtureOptionsContainerB
 import { NoneTypeExtendsNotTypeIntersection } from "@teronis/ts-definitions";
 
 //
-// Begin tests
+// BEGIN TEST SUITE
 //
 
 type Content0 = string | [number] | {};
@@ -24,7 +24,7 @@ type ValueContentMutations = ["ExtractObject", "ExcludeArray"];
 declare var MutationArray: ContentMutationAsArray<ValueContentMutations>
 declare var ValueContent0: ValueContent<Content0, ValueContentMutations>;
 
-// 
+//
 
 interface a1 {
     a: {
@@ -98,7 +98,7 @@ PrimsMixture0;
 // PrimsMixture0.DefaultOptions.
 
 //
-// End tests
+// END TEST SUITE
 //
 
 // type testtt_0 = PureDualContent<{ a: { a: "a1" } }, { a: { a: "a2" } }>;
@@ -126,7 +126,7 @@ testtt24.RecursiveMutualPropsMixture.MutualOptionalProps.;
 declare var CheckNoneTypeExtendsTypes : NoneTypeExtendsNotTypeIntersection<number, never, never, { WrapInTuple: true }>;
 
 // testtt24.a.e.e.e.
-// type test<> = 
+// type test<> =
 
 declare var TestUnknownNever : Pick<{}, never>;
 type test = typeof TestUnknownNever;

@@ -515,7 +515,7 @@ export type RecursiveMutualPropsMixture<
             RecursiveMutualPropsMixture: {
                 DualContentKeychain: DualContentKeychain
                 __ArrayPrimsPropsOptions: __ArrayPrimsPropsOptions,
-                MutualOptionalProps: { [K in DualContentKeychain["RequiredKeyIntersection"]]?: PropsMixtureBase<PureDualContent<DualContent["LeftContent"][K], DualContent["RightContent"][K]>, __PropsMixtureOptions>; }
+                MutualOptionalProps: { [K in DualContentKeychain["RequiredKeyIntersection"]]: PropsMixtureBase<PureDualContent<DualContent["LeftContent"][K], DualContent["RightContent"][K]>, __PropsMixtureOptions>; }
             }
         }
 
